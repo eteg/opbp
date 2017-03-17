@@ -2,10 +2,18 @@ var path = require('path')
 var webpack = require('webpack')
 var packageJSON = require('./package.json')
 
-const PATHS = {
-  build: path.join(__dirname, 'src', 'main', 'resources', 'META-INF', 'resources', 'webjars', packageJSON.name, packageJSON.version),
-  publicPath: ['webjars/', packageJSON.name, '/', packageJSON.version, '/'].join('')
-};
+var PATHS = {}
+if (process.env.NODE_ENV === 'production') {
+  PATHS = {
+    build: path.join(__dirname, 'src', 'main', 'resources', 'META-INF', 'resources', 'webjars', packageJSON.name, packageJSON.version),
+    publicPath: ['webjars/', packageJSON.name, '/', packageJSON.version, '/'].join('')
+  };
+} else {
+  PATHS = {
+    build: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/'
+  };
+}
 
 module.exports = {
   entry: './src/main.js',
@@ -36,6 +44,14 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
@@ -56,7 +72,14 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.ProvidePlugin({
+      jquery: 'jquery',
+      $: 'jquery',
+      jQuery: 'jquery',
+    }),
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
