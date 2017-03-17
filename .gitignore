@@ -8,3 +8,7 @@ yarn-error.log
 .project
 .settings/
 .cache-main
+/opbp-backend/
+/opbp-frontend/
+/.gradle/
+webjars/

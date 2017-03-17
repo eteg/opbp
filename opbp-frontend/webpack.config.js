@@ -1,11 +1,17 @@
 var path = require('path')
 var webpack = require('webpack')
+var packageJSON = require('./package.json')
+
+const PATHS = {
+  build: path.join(__dirname, 'src', 'main', 'resources', 'META-INF', 'resources', 'webjars', packageJSON.name, packageJSON.version),
+  publicPath: ['webjars/', packageJSON.name, '/', packageJSON.version, '/'].join('')
+};
 
 module.exports = {
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, './target/webpack'),
-    publicPath: '/webjars/opbp-frontend/0.0.1-SNAPSHOT/',
+    path: PATHS.build,
+    publicPath: PATHS.publicPath,
     filename: 'build.js'
   },
   module: {

@@ -1,0 +1,5 @@
+/*
+ * Inclui os submodulos
+ */
+include ':opbp-backend'
+include ':opbp-frontend'
