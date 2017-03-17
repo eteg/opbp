@@ -1,0 +1,49 @@
+/*
+ * Importa o spring boot gradle plugin
+ */
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath   'org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE'
+    }
+}
+
+/*
+ * Aplica outros plugins
+ */
+apply plugin: 'scala'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+/*
+ * Configura o artefato gerado pela build.
+ */
+jar {
+    baseName = 'opbp-backend'
+    version =  '0.0.1'
+}
+
+/*
+ * Configura os repositórios
+ */
+repositories {
+    mavenCentral()
+}
+
+/*
+ * Configura o código fonte
+ */
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+ 
+dependencies {
+    compile project(':opbp-frontend')
+    compile 'org.scala-lang:scala-library:2.12.1'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-data-rest'
+    runtime 'com.h2database:h2'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
