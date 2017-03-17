@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './app/main.js',
   output: {
     path: PATHS.build,
     publicPath: PATHS.publicPath,
