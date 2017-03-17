@@ -11,7 +11,7 @@ branches:
     - master
 
 before_install:
-  - chmod +x gradlew
+  - chmod +x gradlew 
 
 script:
-  - ./gradlew clean build
+  - ./gradlew clean build --stacktrace
