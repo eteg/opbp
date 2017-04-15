@@ -2,7 +2,7 @@
 var path = require('path')
 var packageJSON = require('../package.json')
 
-var webjarFolder = path.join(__dirname, '..', 'src', 'main', 'resources', 'META-INF', 'resources', 'webjars', packageJSON.name, packageJSON.version);
+var webjarFolder = path.join(__dirname, '..', 'src', 'main', 'resources', 'META-INF', 'resources', 'webjars', packageJSON.name);
 
 module.exports = {
   build: {

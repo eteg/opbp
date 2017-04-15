@@ -18,6 +18,6 @@ class StaticFilesConfig extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/app/**")
 				.addResourceLocations(
-				"classpath:/META-INF/resources/webjars/opbp-frontend/0.0.1/")
+				"classpath:/META-INF/resources/webjars/opbp-frontend/")
 	}
 }
