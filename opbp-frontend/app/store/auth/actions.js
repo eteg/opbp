@@ -9,7 +9,7 @@ Vue.use(VueAxios, axios)
 export const signIn = ({ commit }, { username, password }) => {
   Vue.axios(`/accounts/search/findByUsername?username=${username}`,
     {
-      baseURL: 'http://localhost:8080',
+      baseURL: 'http://localhost:8080/rest',
       withCredentials: true,
       auth: {
         username, password

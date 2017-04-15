@@ -11,7 +11,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().fullyAuthenticated().and().
+		http.authorizeRequests().antMatchers("/rest/**").fullyAuthenticated().and().
 				httpBasic().and().
 				csrf().disable()
 	}

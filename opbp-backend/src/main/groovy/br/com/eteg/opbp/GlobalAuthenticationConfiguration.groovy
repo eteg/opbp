@@ -14,7 +14,7 @@ import br.com.eteg.opbp.entities.Account
 import br.com.eteg.opbp.repository.AccountRepository
 
 @Configuration
-class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
+class GlobalAuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
 	@Autowired
 	AccountRepository userRepository
