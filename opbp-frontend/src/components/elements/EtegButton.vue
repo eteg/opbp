@@ -1,5 +1,5 @@
 <template>
-  <a :class="clazz">{{text}}</a>
+  <a :class="clazz" @click="emitClick">{{text}}</a>
 </template>
 
 <script>
@@ -14,7 +14,7 @@ export default {
       default: '',
 
       validator (value) {
-        [
+        return [
           '',
           'white',
           'light',
@@ -34,6 +34,12 @@ export default {
   data () {
     return {
       clazz: this.type === '' ? 'button' : `button is-${this.type}`
+    }
+  },
+
+  methods: {
+    emitClick () {
+      this.$emit('click')
     }
   }
 }
