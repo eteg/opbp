@@ -1,13 +1,16 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
+var packageJSON = require('../package.json')
+
+var webjarFolder = path.join(__dirname, '..', 'src', 'main', 'resources', 'META-INF', 'resources', 'webjars', packageJSON.name, packageJSON.version);
 
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    index: path.resolve(__dirname, webjarFolder + '/index.html'),
+    assetsRoot: webjarFolder,
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: ['/', 'webjars/', packageJSON.name, '/', packageJSON.version, '/'].join(''),
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
