@@ -16,27 +16,27 @@ import br.com.eteg.opbp.repository.AccountRepository
 @Configuration
 class GlobalAuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
-	@Autowired
-	AccountRepository userRepository
+  @Autowired
+  AccountRepository userRepository
 
-	@Override
-	void init(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService userDetailsService()
-	}
+  @Override
+  void init(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService userDetailsService()
+  }
 
-	@Bean
-	UserDetailsService userDetailsService(){
-		return [
-			loadUserByUsername: { username ->
-				final Account account = userRepository.findByUsername(username)
+  @Bean
+  UserDetailsService userDetailsService(){
+    return [
+      loadUserByUsername: { username ->
+        final Account account = userRepository.findByUsername(username)
 
-				if(account){
-					return new User(account.username, account.password,
-							AuthorityUtils.createAuthorityList("USER"))
-				} else {
-					throw new UsernameNotFoundException("could not find the user '${username}'")
-				}
-			}
-		] as UserDetailsService
-	}
+        if(account){
+          return new User(account.username, account.password,
+              AuthorityUtils.createAuthorityList("USER"))
+        } else {
+          throw new UsernameNotFoundException("could not find the user '${username}'")
+        }
+      }
+    ] as UserDetailsService
+  }
 }

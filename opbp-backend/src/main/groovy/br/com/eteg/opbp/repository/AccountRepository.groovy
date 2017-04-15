@@ -10,5 +10,5 @@ import br.com.eteg.opbp.entities.Account
 
 @CrossOrigin
 interface AccountRepository extends CrudRepository<Account, Integer> {
-	Account findByUsername(@Param("username") String username)
+  Account findByUsername(@Param("username") String username)
 }

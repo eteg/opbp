@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 @Entity
 @JsonIgnoreProperties("password")
 class Account {
-	@Id @GeneratedValue Integer id
-	String username
-	String password
+  @Id @GeneratedValue Integer id
+  String username
+  String password
 }

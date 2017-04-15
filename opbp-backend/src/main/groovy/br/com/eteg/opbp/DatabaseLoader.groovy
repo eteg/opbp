@@ -12,18 +12,18 @@ import br.com.eteg.opbp.repository.AccountRepository
 @Component
 class DatabaseLoader implements CommandLineRunner {
 
-	@Autowired
-	private TodoRepository todoRepository
+  @Autowired
+  private TodoRepository todoRepository
 
-	@Autowired
-	private AccountRepository userRepository;
-	
-	@Override
-	void run(String... args) throws Exception {
-		userRepository.save new Account(username: "dougefr", password: "123456")
-		
-		5.times {
-			todoRepository.save new Todo(text: "Todo ${it+1}", completed: false)
-		}
-	}
+  @Autowired
+  private AccountRepository userRepository
+
+  @Override
+  void run(String... args) throws Exception {
+    userRepository.save new Account(username: "dougefr", password: "123456")
+
+    5.times {
+      todoRepository.save new Todo(text: "Todo ${it+1}", completed: false)
+    }
+  }
 }

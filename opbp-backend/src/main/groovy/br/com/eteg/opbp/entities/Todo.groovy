@@ -6,7 +6,7 @@ import javax.persistence.Id
 
 @Entity
 class Todo {
-	@Id @GeneratedValue Integer id
-	String text
-	Boolean completed
+  @Id @GeneratedValue Integer id
+  String text
+  Boolean completed
 }

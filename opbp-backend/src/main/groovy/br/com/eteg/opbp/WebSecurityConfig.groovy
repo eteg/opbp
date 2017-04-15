@@ -9,10 +9,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Override
-	void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/rest/**").fullyAuthenticated().and().
-				httpBasic().and().
-				csrf().disable()
-	}
+  @Override
+  void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests().antMatchers("/rest/**").fullyAuthenticated().and().
+        httpBasic().and().
+        csrf().disable()
+  }
 }

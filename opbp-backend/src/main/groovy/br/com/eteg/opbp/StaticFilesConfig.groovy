@@ -8,16 +8,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 class StaticFilesConfig extends WebMvcConfigurerAdapter {
 
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/")
-				.setViewName("forward:/app/index.html")
-	}
+  @Override
+  void addViewControllers(ViewControllerRegistry registry) {
+    registry.addViewController("/")
+        .setViewName("forward:/app/index.html")
+  }
 
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/app/**")
-				.addResourceLocations(
-				"classpath:/META-INF/resources/webjars/opbp-frontend/")
-	}
+  @Override
+  void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/app/**")
+        .addResourceLocations(
+        "classpath:/META-INF/resources/webjars/opbp-frontend/")
+  }
 }

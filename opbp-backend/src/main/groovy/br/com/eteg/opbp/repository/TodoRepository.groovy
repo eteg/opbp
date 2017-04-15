@@ -11,11 +11,11 @@ import br.com.eteg.opbp.entities.Todo
 @CrossOrigin
 @RepositoryRestResource(collectionResourceRel = "todos", path = "todos")
 interface TodoRepository extends CrudRepository<Todo, Integer> {
-	List<Todo> findByCompleted(@Param("completed") Boolean completed)
-	
-	@Query("from Todo where completed = true")
-	List<Todo> findCompleted()
-	
-	@Query("from Todo where completed = false")
-	List<Todo> findIncompleted()
+  List<Todo> findByCompleted(@Param("completed") Boolean completed)
+
+  @Query("from Todo where completed = true")
+  List<Todo> findCompleted()
+
+  @Query("from Todo where completed = false")
+  List<Todo> findIncompleted()
 }
