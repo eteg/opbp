@@ -14,7 +14,6 @@ buildscript {
  * Aplica outros plugins
  */
 apply plugin: 'java'
-apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
@@ -24,6 +23,14 @@ apply plugin: 'org.springframework.boot'
 jar {
     baseName = 'opbp-backend'
     version =  '0.0.1'
+}
+
+springBoot {
+  mainClass = 'br.com.eteg.opbp.Application'
+}
+
+bootRun {
+  args = ['--spring.profiles.active=dev']
 }
 
 /*
@@ -41,7 +48,6 @@ targetCompatibility = 1.8
  
 dependencies {
     compile project(':opbp-frontend')
-    compile 'org.codehaus.groovy:groovy:2.3.7'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-data-rest'
