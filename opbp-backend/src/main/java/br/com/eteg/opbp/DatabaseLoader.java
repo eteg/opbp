@@ -9,7 +9,6 @@ import br.com.eteg.opbp.repository.AccountRepository;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
-
   @Autowired
   private AccountRepository userRepository;
 

@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import auth from './auth'
+/*
+ * Importa os submódulos.
+ */
+import auth from '@/store/auth'
 
 Vue.use(Vuex)
 

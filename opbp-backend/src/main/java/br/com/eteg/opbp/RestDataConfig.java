@@ -6,7 +6,6 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 
 @Configuration
 public class RestDataConfig extends RepositoryRestMvcConfiguration {
-
   @Override
   public RepositoryRestConfiguration config() {
     RepositoryRestConfiguration configuration = super.config();

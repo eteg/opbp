@@ -3,7 +3,6 @@ package br.com.eteg.opbp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -14,10 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import br.com.eteg.opbp.entities.Account;
 import br.com.eteg.opbp.repository.AccountRepository;
 
-@Profile("production")
 @Configuration
 public class GlobalAuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
-
   @Autowired
   private AccountRepository accountRepository;
 
@@ -26,7 +23,6 @@ public class GlobalAuthenticationConfiguration extends GlobalAuthenticationConfi
     auth.userDetailsService(userDetailsService());
   }
 
-  @Profile("production")
   @Bean
   public UserDetailsService userDetailsService() {
     return username -> {

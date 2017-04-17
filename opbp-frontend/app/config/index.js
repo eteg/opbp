@@ -2,7 +2,17 @@
 var path = require('path')
 var packageJSON = require('../package.json')
 
-var webjarFolder = path.join(__dirname, '..', 'src', 'main', 'resources', 'META-INF', 'resources', 'webjars', packageJSON.name);
+var webjarFolder = path.join(
+  __dirname, 
+  '..', 
+  '..', 
+  'src', 
+  'main', 
+  'resources', 
+  'META-INF', 
+  'resources', 
+  'webjars', 
+  packageJSON.name);
 
 module.exports = {
   build: {
@@ -30,7 +40,15 @@ module.exports = {
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/rest': {
+        target: 'http://localhost:8080/rest',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/rest': ''
+        }
+      }
+    },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
