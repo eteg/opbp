@@ -8,8 +8,18 @@ import App from '@/App'
 import router from '@/router'
 import store from '@/store'
 
-Vue.use(VueAxios, axios)
+axios.interceptors.response
+  .use(response => response,
+  error => {
+    if (error.response.status === 401) {
+      router.go('/')
+    }
 
+    return Promise.reject(error)
+  })
+
+
+Vue.use(VueAxios, axios)
 
 /* eslint-disable no-new */
 new Vue({
