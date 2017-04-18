@@ -35,8 +35,14 @@ targetCompatibility = 1.8
 
 task yarn(type: Exec) {
     workingDir "${rootDir}/opbp-frontend/app"
-    commandLine 'cmd', '/c', 'yarn'
-    commandLine 'cmd', '/c', 'yarn', 'build'
+    
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        commandLine 'cmd', '/c', 'yarn'
+        commandLine 'cmd', '/c', 'yarn', 'build'
+    } else {
+        commandLine 'yarn'
+        commandLine 'yarn', 'build'
+    }
 }
 
 compileJava {
