@@ -47,6 +47,13 @@ module.exports = {
         pathRewrite: {
           '^/rest': ''
         }
+      },
+      '/login': {
+        target: 'http://localhost:8080/login',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/login': ''
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

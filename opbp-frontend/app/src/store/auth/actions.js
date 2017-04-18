@@ -2,14 +2,16 @@ import Vue from 'vue'
 import * as types from './mutation-types'
 
 export const signIn = ({ commit }, { username, password }) => {
-  const authHash = btoa(`${username}:${password}`)
+  let data = new FormData()
+  data.append('action', 'login')
+  data.append('username', username)
+  data.append('password', password)
 
-  Vue.axios.get(`rest/accounts/search/findByUsername?username=${username}`,
+  Vue.axios.post('login', data,
     {
-      headers: {
-        'Authorization': `Basic ${authHash}`
-      }
+      headers: { 'Content-Type': 'multipart/form-data' }
     }).then((response) => {
+      console.log(response)
       commit(types.SIGN_IN, response.data)
     })
 }
