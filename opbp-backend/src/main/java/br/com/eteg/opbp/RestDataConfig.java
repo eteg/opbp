@@ -8,7 +8,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 public class RestDataConfig extends RepositoryRestMvcConfiguration {
   @Override
   public RepositoryRestConfiguration config() {
-    RepositoryRestConfiguration configuration = super.config();
+    final RepositoryRestConfiguration configuration = super.config();
     return configuration.setBasePath("/rest");
   }
 }
