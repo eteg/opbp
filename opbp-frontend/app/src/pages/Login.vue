@@ -27,8 +27,8 @@
             <ui-column size="3" />
             <ui-column size="9">
               <ui-button type="primary"
-                           text="Sign in"
-                           @click="signIn({username, password})" />
+                         text="Sign in"
+                         @click="doSignIn()" />
               <ui-button text="Sign up" />
             </ui-column>
           </ui-columns>
@@ -48,14 +48,20 @@ import UiColumn from '@/ui/grid/UiColumn'
 import UiButton from '@/ui/elements/UiButton'
 import UiBox from '@/ui/elements/UiBox'
 
+import router from '@/router'
+
 export default {
   components: { UiSection, UiColumns, UiColumn, UiButton, UiBox },
 
   methods: {
-    ...mapActions('auth', ['signIn'])
+    ...mapActions('auth', ['signIn']),
+
+    doSignIn() {
+      this.signIn({ username: this.username, password: this.password }).then(() => router.replace('home'))
+    }
   },
 
-  data () {
+  data() {
     return {
       username: '',
       password: ''

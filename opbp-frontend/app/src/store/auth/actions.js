@@ -7,7 +7,7 @@ export const signIn = ({ commit }, { username, password }) => {
   loginFormData.append('username', username)
   loginFormData.append('password', password)
 
-  Vue.axios.post('login', loginFormData,
+  return Vue.axios.post('login', loginFormData,
     {
       headers: { 'Content-Type': 'multipart/form-data' }
     }).then((response) => {
