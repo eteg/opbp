@@ -1,20 +1,26 @@
 <template>
   <div id="app">
+    {{loggedUser}}
     <div class="container" style="margin-top: 3rem;">
       <router-view></router-view>
     </div>
-    <eteg-footer>
+    <ui-footer>
       Overpower Boilerplate - Just another boilderplate :)
-    </eteg-footer>
+    </ui-footer>
   </div>
 </template>
 
 <script>
-import EtegHero from '@/components/layout/EtegHero'
-import EtegFooter from '@/components/layout/EtegFooter'
+import { mapState } from 'vuex'
+
+import UiFooter from '@/ui/layout/UiFooter'
 
 export default {
-  components: { EtegHero, EtegFooter },
-  name: 'app'
+  components: { UiFooter },
+  name: 'app',
+
+  computed: {
+    ...mapState('auth', ['loggedUser'])
+  },
 }
 </script>
