@@ -21,7 +21,7 @@ public class LoginController {
   @Autowired
   private AuthenticationManager authenticationManager;
 
-  @PostMapping(value = "/login")
+  @PostMapping("/login")
   public ResponseEntity<?> login(@RequestParam("username") String username,
       @RequestParam("password") String password, HttpServletRequest request) {
     try {
@@ -40,5 +40,11 @@ public class LoginController {
     } catch (AuthenticationException e) {
       return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
+  }
+  
+  @PostMapping("/logout")
+  public ResponseEntity<?> logout(HttpSession session) {
+      session.invalidate();
+      return new ResponseEntity<>(HttpStatus.OK);
   }
 }

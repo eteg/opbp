@@ -9,7 +9,6 @@ import store from '@/store'
 Vue.use(Router)
 
 function requireAuth (to, from, next) {
-  console.log(store.state.auth.loggedUser)
   if (!store.state.auth.loggedUser) {
     next('/')
   } else {

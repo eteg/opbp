@@ -5524,6 +5524,10 @@ timers-browserify@^2.0.2:
   dependencies:
     setimmediate "^1.0.4"
 
+tiny-cookie@^1.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/tiny-cookie/-/tiny-cookie-1.0.1.tgz#753786079c642a3c3d0b2accad600f8de119ac2a"
+
 tmp@0.0.31, tmp@0.0.x:
   version "0.0.31"
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.31.tgz#8f38ab9438e17315e5dbd8b3657e8bfb277ae4a7"
@@ -5749,6 +5753,12 @@ void-elements@^2.0.0:
 vue-axios@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/vue-axios/-/vue-axios-2.0.1.tgz#fc7f5f06d1f9190f24feca232c4c11dffba54024"
+
+vue-cookie@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/vue-cookie/-/vue-cookie-1.1.4.tgz#b8b46d112bda9f93a2f47017c2ed5282d2064fda"
+  dependencies:
+    tiny-cookie "^1.0"
 
 vue-hot-reload-api@^2.0.11:
   version "2.0.11"

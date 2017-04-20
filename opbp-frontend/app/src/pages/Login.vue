@@ -57,8 +57,14 @@ export default {
     ...mapActions('auth', ['signIn']),
 
     doSignIn() {
-      this.signIn({ username: this.username, password: this.password }).then(() => router.replace('home'))
+      this.signIn({ username: this.username, password: this.password }).then(() => {
+        this.$router.replace('home')
+      })
     }
+  },
+
+  computed: {
+    ...mapState('auth', ['loggedUser'])
   },
 
   data() {

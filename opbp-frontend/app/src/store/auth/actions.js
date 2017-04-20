@@ -1,20 +1,16 @@
-import Vue from 'vue'
+import http from '@/http'
 import * as types from './mutation-types'
 
 export const signIn = ({ commit }, { username, password }) => {
-  let loginFormData = new FormData()
+  const loginFormData = new FormData()
   loginFormData.append('action', 'login')
   loginFormData.append('username', username)
   loginFormData.append('password', password)
 
-  return Vue.axios.post('login', loginFormData,
-    {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }).then((response) => {
-      return Vue.axios.get('rest/accounts/search/findByUsername', {
-        params: { username }
-      })
-    }).then((response) => {
-      commit(types.SIGN_IN, response.data)
-    })
+  const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+
+  return http
+    .post('login', loginFormData, config)
+    .then(response => http.get('rest/accounts/search/findByUsername', { params: { username } }))
+    .then(response => commit(types.SIGN_IN, response.data))
 }
