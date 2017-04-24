@@ -1,0 +1,14 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "eslint.options": { "configFile": "app/.eslintrc.js" },
+  "files.exclude": {
+    ".gradle": true,
+    ".settings": true,
+    "bin": true,
+    "build": true,
+    "src": true,
+    ".classpath": true,
+    ".project": true,
+    "app/node_modules": true
+  }
+}
