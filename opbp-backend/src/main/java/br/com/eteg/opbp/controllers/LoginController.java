@@ -12,14 +12,24 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LoginController {
   @Autowired
   private AuthenticationManager authenticationManager;
+
+  @GetMapping("/login")
+  @ResponseBody
+  public String getLoggedUser() {
+    return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+        .getUsername();
+  }
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestParam("username") String username,
@@ -35,16 +45,16 @@ public class LoginController {
 
       final HttpSession session = request.getSession(true);
       session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
-      
+
       return new ResponseEntity<>(HttpStatus.OK);
     } catch (AuthenticationException e) {
       return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
   }
-  
+
   @PostMapping("/logout")
   public ResponseEntity<?> logout(HttpSession session) {
-      session.invalidate();
-      return new ResponseEntity<>(HttpStatus.OK);
+    session.invalidate();
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 }
