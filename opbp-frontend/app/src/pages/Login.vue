@@ -5,6 +5,11 @@
       <ui-box>
         <ui-section title="Login">
           <ui-columns>
+            <ui-column size="12">
+              <ui-error :errors="errors" />
+            </ui-column>
+          </ui-columns>
+          <ui-columns>
             <ui-column size="3">
               <label for="username">Username: </label>
             </ui-column>
@@ -47,17 +52,36 @@ import UiColumns from '@/ui/grid/UiColumns'
 import UiColumn from '@/ui/grid/UiColumn'
 import UiButton from '@/ui/elements/UiButton'
 import UiBox from '@/ui/elements/UiBox'
+import UiError from '@/ui/components/UiError'
 
 export default {
-  components: { UiSection, UiColumns, UiColumn, UiButton, UiBox },
+  components: { UiSection, UiColumns, UiColumn, UiButton, UiBox, UiError },
 
   methods: {
     ...mapActions('auth', ['signIn', 'recoverUser']),
 
     doSignIn() {
-      this.signIn({ username: this.username, password: this.password }).then(() => {
-        this.$router.replace('home')
-      })
+      this.errors = []
+
+      if (!this.username) {
+        this.errors.push('Username is required.')
+      }
+
+      if (!this.password) {
+        this.errors.push('Password is required.')
+      }
+
+      if (this.errors.length === 0) {
+        this.signIn({ username: this.username, password: this.password }).then(() => {
+          this.$router.replace('home')
+        }).catch(error => {
+          if (error.response.status === 403) {
+            this.errors.push('Invalid username/password')
+          } else {
+            this.errors.push(`Server returned error ${error.response.status} - ${error.response.statusText}`)
+          }
+        })
+      }
     }
   },
 
@@ -68,7 +92,8 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      errors: []
     }
   },
 
