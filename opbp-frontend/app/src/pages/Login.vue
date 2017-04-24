@@ -48,13 +48,11 @@ import UiColumn from '@/ui/grid/UiColumn'
 import UiButton from '@/ui/elements/UiButton'
 import UiBox from '@/ui/elements/UiBox'
 
-import router from '@/router'
-
 export default {
   components: { UiSection, UiColumns, UiColumn, UiButton, UiBox },
 
   methods: {
-    ...mapActions('auth', ['signIn']),
+    ...mapActions('auth', ['signIn', 'recoverUser']),
 
     doSignIn() {
       this.signIn({ username: this.username, password: this.password }).then(() => {
@@ -72,6 +70,12 @@ export default {
       username: '',
       password: ''
     }
+  },
+
+  created() {
+    this.recoverUser().then(
+      () => { if (this.loggedUser) this.$router.replace('home') }
+    )
   }
 }
 </script>
