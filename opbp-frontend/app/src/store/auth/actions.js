@@ -23,3 +23,9 @@ export const recoverUser = ({ commit }) => {
     .then(response => commit(types.SIGN_IN, response.data))
     .catch(() => commit(types.SIGN_OUT))
 }
+
+export const signOut = ({ commit }) => {
+  return http
+    .post('logout')
+    .then(() => commit(types.SIGN_OUT))
+}

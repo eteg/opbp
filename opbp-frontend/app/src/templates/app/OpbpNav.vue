@@ -14,14 +14,15 @@
         {{loggedUser.username}}
       </ui-nav-item>
       <ui-nav-item>
-          <ui-button text="Sign out" />
+        <ui-button text="Sign out"
+                   @click="doSignOut()" />
       </ui-nav-item>
     </template>
   </ui-nav>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 import UiNav from '@/ui/components/UiNav'
 import UiNavItem from '@/ui/components/UiNavItem'
@@ -30,9 +31,19 @@ import UiButton from '@/ui/elements/UiButton'
 export default {
   components: { UiNav, UiNavItem, UiButton },
 
+  methods: {
+    ...mapActions('auth', ['signOut']),
+
+    doSignOut() {
+      this.signOut().then(() => {
+        this.$router.replace('/')
+      })
+    }
+  },
+
   computed: {
     ...mapState('auth', ['loggedUser'])
-  }
+  },
 }
 </script>
 
