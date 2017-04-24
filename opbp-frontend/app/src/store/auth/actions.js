@@ -19,7 +19,13 @@ export const signIn = ({ commit }, { username, password }) => {
 export const recoverUser = ({ commit }) => {
   return http
     .get('login')
-    .then(response => http.get('rest/accounts/search/findByUsername', { params: { username: response.data } }))
+    .then(response => {
+      if (response.data) {
+        return http.get('rest/accounts/search/findByUsername', { params: { username: response.data } })
+      }
+
+      throw new Error('user cannot be recovered')
+    })
     .then(response => commit(types.SIGN_IN, response.data))
     .catch(() => commit(types.SIGN_OUT))
 }

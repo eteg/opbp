@@ -27,8 +27,12 @@ public class LoginController {
   @GetMapping("/login")
   @ResponseBody
   public String getLoggedUser() {
-    return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-        .getUsername();
+    try {
+      return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+          .getUsername();
+    } catch (Exception e) {
+      return "";
+    }
   }
 
   @PostMapping("/login")
