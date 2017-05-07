@@ -1,4 +1,4 @@
-package br.com.eteg.opbp;
+package br.com.eteg.opbp.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +14,6 @@ public class DatabaseLoader implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    userRepository.save(new Account("dougefr", "123456"));
+    userRepository.save(new Account("dougefr", "123456", "Douglas Rodrigues", "dougefr@gmail.com"));
   }
 }

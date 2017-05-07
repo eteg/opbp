@@ -2,23 +2,22 @@ import http from '@/http'
 import * as types from './mutation-types'
 
 export const signIn = ({ commit }, { username, password }) => {
-  const loginFormData = new FormData()
-  loginFormData.append('action', 'login')
-  loginFormData.append('username', username)
-  loginFormData.append('password', password)
+  const formData = new FormData()
+  formData.append('username', username)
+  formData.append('password', password)
 
   const config = { headers: { 'Content-Type': 'multipart/form-data' } }
 
   return http
-    .post('login', loginFormData, config)
-    .then(response => http.get('login'))
+    .post('signIn', formData, config)
+    .then(response => http.get('loggedUser'))
     .then(response => http.get('rest/accounts/search/findByUsername', { params: { username: response.data } }))
     .then(response => commit(types.SIGN_IN, response.data))
 }
 
 export const recoverUser = ({ commit }) => {
   return http
-    .get('login')
+    .get('loggedUser')
     .then(response => {
       if (response.data) {
         return http.get('rest/accounts/search/findByUsername', { params: { username: response.data } })
@@ -32,6 +31,19 @@ export const recoverUser = ({ commit }) => {
 
 export const signOut = ({ commit }) => {
   return http
-    .post('logout')
+    .post('signOut')
     .then(() => commit(types.SIGN_OUT))
+}
+
+export const signUp = ({ commit }, { username, password, name, email }) => {
+  const formData = new FormData()
+  formData.append('username', username)
+  formData.append('password', password)
+  formData.append('name', name)
+  formData.append('email', email)
+
+  const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+
+  return http
+    .post('signUp', formData, config)
 }

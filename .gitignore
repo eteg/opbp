@@ -9,6 +9,8 @@ yarn-error.log
 .settings/
 .cache-main
 bin/
-build/
+/build/
+/opbp-backend/build/
+/opbp-frontend/build/
 .gradle/
 webjars/

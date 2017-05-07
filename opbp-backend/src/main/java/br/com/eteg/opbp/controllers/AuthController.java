@@ -19,12 +19,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.eteg.opbp.entities.Account;
+import br.com.eteg.opbp.repository.AccountRepository;
+
 @Controller
-public class LoginController {
+public class AuthController {
   @Autowired
   private AuthenticationManager authenticationManager;
 
-  @GetMapping("/login")
+  @Autowired
+  private AccountRepository accountRepository;
+  
+  @GetMapping("/loggedUser")
   @ResponseBody
   public String getLoggedUser() {
     try {
@@ -35,7 +41,7 @@ public class LoginController {
     }
   }
 
-  @PostMapping("/login")
+  @PostMapping("/signIn")
   public ResponseEntity<?> login(@RequestParam("username") String username,
       @RequestParam("password") String password, HttpServletRequest request) {
     try {
@@ -55,8 +61,16 @@ public class LoginController {
       return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
   }
+  
+  @PostMapping("/signUp")
+  public ResponseEntity<?> signUp(@RequestParam("username") String username,
+      @RequestParam("password") String password, @RequestParam("name") String name,
+      @RequestParam("email") String email, HttpServletRequest request) {
+    accountRepository.save(new Account(username, password, name, email));
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
 
-  @PostMapping("/logout")
+  @PostMapping("/signOut")
   public ResponseEntity<?> logout(HttpSession session) {
     session.invalidate();
     return new ResponseEntity<>(HttpStatus.OK);

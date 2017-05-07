@@ -2,7 +2,10 @@
   <ui-columns>
     <ui-column size="4" />
     <ui-column size="4">
-      <login-form />
+      <sign-in-form v-if="!showSignUpForm"
+                    @sign-up="changeToSignUpForm()" />
+      <sign-up-form v-if="showSignUpForm"
+                    @go-back="changeToSignInForm()" />
     </ui-column>
     <ui-column size="4" />
   </ui-columns>
@@ -14,20 +17,37 @@ import { mapState, mapActions } from 'vuex'
 import UiColumns from '@/ui/grid/UiColumns'
 import UiColumn from '@/ui/grid/UiColumn'
 
-import LoginForm from './LoginForm'
+import SignInForm from './SignInForm'
+import SignUpForm from './SignUpForm'
 
 export default {
-  components: { UiColumns, UiColumn, LoginForm },
+  components: { UiColumns, UiColumn, SignInForm, SignUpForm },
 
   methods: {
-    ...mapActions('auth', ['recoverUser'])
+    ...mapActions('auth', ['recoverUser']),
+
+    changeToSignUpForm() {
+      this.showSignUpForm = true
+    },
+
+    changeToSignInForm() {
+      this.showSignUpForm = false
+    }
   },
 
   computed: {
     ...mapState('auth', ['loggedUser'])
   },
 
+  data() {
+    return {
+      showSignUpForm: false
+    }
+  },
+
   created() {
+    this.showSignUpForm = false
+
     this.recoverUser().then(
       () => { if (this.loggedUser) this.$router.replace('home') }
     )

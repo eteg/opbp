@@ -1,4 +1,4 @@
-package br.com.eteg.opbp;
+package br.com.eteg.opbp.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

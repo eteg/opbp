@@ -12,7 +12,7 @@ var webjarFolder = path.join(
   'META-INF',
   'resources',
   'webjars',
-  packageJSON.name);
+  packageJSON.name)
 
 module.exports = {
   build: {
@@ -48,20 +48,34 @@ module.exports = {
           '^/rest': ''
         }
       },
-      '/login': {
-        target: 'http://localhost:8080/login',
+      '/loggedUser': {
+        target: 'http://localhost:8080/loggedUser',
         changeOrigin: true,
         pathRewrite: {
-          '^/login': ''
+          '^/loggedUser': ''
         }
       },
-      '/logout': {
-        target: 'http://localhost:8080/logout',
+      '/signIn': {
+        target: 'http://localhost:8080/signIn',
         changeOrigin: true,
         pathRewrite: {
-          '^/logout': ''
+          '^/signIn': ''
         }
-      }
+      },
+      '/signUp': {
+        target: 'http://localhost:8080/signUp',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/signUp': ''
+        }
+      },
+      '/signOut': {
+        target: 'http://localhost:8080/signOut',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/signOut': ''
+        }
+      },
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

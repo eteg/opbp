@@ -1,9 +1,27 @@
 <template>
   <ui-box>
-    <ui-section title="Login">
+    <ui-section title="Sign up">
       <ui-columns>
         <ui-column size="12">
           <ui-error :errors="errors" />
+        </ui-column>
+      </ui-columns>
+      <ui-columns>
+        <ui-column size="3">
+          <label for="name">Name: </label>
+        </ui-column>
+        <ui-column size="9">
+          <input id="name"
+                 v-model="name" />
+        </ui-column>
+      </ui-columns>
+      <ui-columns>
+        <ui-column size="3">
+          <label for="email">Email: </label>
+        </ui-column>
+        <ui-column size="9">
+          <input id="email"
+                 v-model="email" />
         </ui-column>
       </ui-columns>
       <ui-columns>
@@ -26,12 +44,23 @@
         </ui-column>
       </ui-columns>
       <ui-columns>
+        <ui-column size="3">
+          <label for="confirmPassword">Confirm password: </label>
+        </ui-column>
+        <ui-column size="9">
+          <input id="confirmPassword"
+                 type="password"
+                 v-model="confirmPassword" />
+        </ui-column>
+      </ui-columns>
+      <ui-columns>
         <ui-column size="3" />
         <ui-column size="9">
           <ui-button type="primary"
-                     text="Sign in"
-                     @click="doSignIn()" />
-          <ui-button text="Sign up" />
+                     text="Sign up"
+                     @click="doSignUp()" />
+          <ui-button text="Go back"
+                     @click="goBack()" />
         </ui-column>
       </ui-columns>
     </ui-section>
@@ -52,10 +81,18 @@ export default {
   components: { UiSection, UiColumns, UiColumn, UiButton, UiBox, UiError },
 
   methods: {
-    ...mapActions('auth', ['signIn']),
+    ...mapActions('auth', ['signUp']),
 
-    doSignIn() {
+    doSignUp() {
       this.errors = []
+
+      if (!this.name) {
+        this.errors.push('Name is required.')
+      }
+
+      if (!this.email) {
+        this.errors.push('Email is required.')
+      }
 
       if (!this.username) {
         this.errors.push('Username is required.')
@@ -65,9 +102,19 @@ export default {
         this.errors.push('Password is required.')
       }
 
+      if (!this.confirmPassword) {
+        this.errors.push('Confirm password is required.')
+      }
+
+      if (this.password && this.confirmPassword && this.password !== this.confirmPassword) {
+        this.errors.push('Password does not match the confirm password.')
+      }
+
       if (this.errors.length === 0) {
-        this.signIn({ username: this.username, password: this.password }).then(() => {
-          this.$router.replace('home')
+        let data = { name: this.name, email: this.email, username: this.username, password: this.password }
+
+        this.signUp(data).then(() => {
+          this.goBack()
         }).catch(error => {
           if (error.response.status === 403) {
             this.errors.push('Invalid username/password')
@@ -76,13 +123,20 @@ export default {
           }
         })
       }
-    }
+    },
+
+    goBack() {
+      this.$emit('go-back')
+    },
   },
 
   data() {
     return {
+      name: '',
+      email: '',
       username: '',
       password: '',
+      confirmPassword: '',
       errors: []
     }
   }
