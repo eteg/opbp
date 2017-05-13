@@ -1,3 +1,5 @@
 FROM openjdk:8
-RUN sh -c 'chmod +x gradlew'
-RUN sh -c './gradlew build buildDocker'
+VOLUME /build
+ADD .
+RUN chmod +x gradlew
+RUN ./gradlew build buildDocker
