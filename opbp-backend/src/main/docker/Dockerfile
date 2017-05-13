@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM openjdk:8
 VOLUME /tmp
 ADD opbp-backend-*.jar app.jar
 RUN sh -c 'touch /app.jar'
