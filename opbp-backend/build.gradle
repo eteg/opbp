@@ -6,9 +6,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath   'org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE'
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
     }
 }
+
+group = 'eteg'
 
 /*
  * Aplica outros plugins
@@ -16,6 +19,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'docker'
 
 /*
  * Configura o artefato gerado pela build.
@@ -31,6 +35,21 @@ springBoot {
 
 bootRun {
   args = ['--spring.profiles.active=dev']
+}
+
+/*
+ * Taks
+ */
+task buildDocker(type: Docker, dependsOn: build) {
+  push = true
+  applicationName = jar.baseName
+  dockerfile = file('src/main/docker/Dockerfile')
+  doFirst {
+    copy {
+      from jar
+      into stageDir
+    }
+  }
 }
 
 /*

@@ -33,20 +33,31 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-task yarn(type: Exec) {
+/*
+ * Tasks
+ */
+task runYarn(type: Exec) {
     workingDir "${rootDir}/opbp-frontend/app"
     
     if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
         commandLine 'cmd', '/c', 'yarn'
-        commandLine 'cmd', '/c', 'yarn', 'build'
     } else {
         commandLine 'yarn'
+    }
+}
+
+task runYarnBuild(type: Exec) {
+    workingDir "${rootDir}/opbp-frontend/app"
+    
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        commandLine 'cmd', '/c', 'yarn', 'build'
+    } else {
         commandLine 'yarn', 'build'
     }
 }
 
 compileJava {
-    dependsOn yarn
+    dependsOn runYarn, runYarnBuild
 }
 
 clean {
