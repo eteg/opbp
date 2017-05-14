@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+node/
+target/
+npm-debug.log
+yarn-error.log
+.classpath
+.project
+.settings/
+.cache-main
+bin/
+/build/
+/opbp-backend/build/
+/opbp-frontend/build/
+.gradle/
+webjars/
