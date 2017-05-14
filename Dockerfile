@@ -18,7 +18,7 @@ RUN sh -c 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -' \
 
 # Otimização: Resolve primeiramente as dependencias para criar um layer com elas
 VOLUME /build
-ADD build.gradle settings.gradle .
+ADD build.gradle settings.gradle ./
 ADD opbp-frontend/build.gradle opbp-frontend/build.gradle
 RUN gradle resolveDependencies
 
