@@ -41,6 +41,7 @@ bootRun {
  * Taks
  */
 task buildDocker(type: Docker, dependsOn: build) {
+  workingDir "${rootDir}/opbp-backend"
   push = true
   applicationName = jar.baseName
   dockerfile = file('src/main/docker/Dockerfile')
