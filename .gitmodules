@@ -1,0 +1,3 @@
+[submodule "opbp-frontend"]
+	path = opbp-frontend
+	url = ../opbp-frontend.git
