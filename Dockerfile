@@ -1,5 +1,7 @@
 FROM gradle:jdk8
 
+USER root
+
 # Instalação do nodejs
 RUN sh -c 'curl -sL https://deb.nodesource.com/setup_7.x | bash -'
 RUN apt-get install -y nodejs
