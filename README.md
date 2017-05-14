@@ -1,3 +1,0 @@
-Para executar:
-
-gradle bootRun
