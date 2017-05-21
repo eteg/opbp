@@ -9,9 +9,13 @@ import javax.persistence.Id
 class Account(
         @Id @GeneratedValue
         var id: Int? = null,
+
         var username: String? = null,
+
         @JsonIgnore
         var password: String? = null,
+
         var name: String? = null,
+
         var email: String? = null
 )
