@@ -14,3 +14,7 @@ bin/
 /opbp-frontend/build/
 .gradle/
 webjars/
+.idea
+*.iml
+*.ipr
+*.iws
