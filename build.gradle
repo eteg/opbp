@@ -16,8 +16,6 @@ buildscript {
     }
 }
 
-group = 'eteg'
-
 /*
  * Aplica outros plugins
  */

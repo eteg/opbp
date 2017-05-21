@@ -6,6 +6,6 @@ import org.springframework.data.repository.query.Param
 import org.springframework.web.bind.annotation.CrossOrigin
 
 @CrossOrigin
-interface AccountRepository : CrudRepository<Account, Int> {
+interface AccountRepository : CrudRepository<Account, Long> {
     fun findByUsername(@Param("username") username: String?): Account?
 }
