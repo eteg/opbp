@@ -1,4 +1,4 @@
-package br.com.eteg.opbp.repository;
+package br.com.eteg.opbp.repositories;
 
 import br.com.eteg.opbp.entities.Account
 import org.springframework.data.repository.CrudRepository

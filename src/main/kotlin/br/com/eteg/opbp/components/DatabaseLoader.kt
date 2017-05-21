@@ -1,7 +1,7 @@
-package br.com.eteg.opbp.component
+package br.com.eteg.opbp.components
 
 import br.com.eteg.opbp.entities.Account
-import br.com.eteg.opbp.repository.AccountRepository
+import br.com.eteg.opbp.repositories.AccountRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 

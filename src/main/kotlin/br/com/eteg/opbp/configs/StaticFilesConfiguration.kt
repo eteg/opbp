@@ -1,4 +1,4 @@
-package br.com.eteg.opbp.config
+package br.com.eteg.opbp.configs
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry

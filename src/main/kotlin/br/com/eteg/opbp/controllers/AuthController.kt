@@ -1,7 +1,7 @@
 package br.com.eteg.opbp.controllers
 
 import br.com.eteg.opbp.entities.Account
-import br.com.eteg.opbp.repository.AccountRepository
+import br.com.eteg.opbp.repositories.AccountRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
@@ -34,7 +34,8 @@ class AuthController(val authenticationManager: AuthenticationManager, val accou
 
     @PostMapping("/signIn")
     fun login(@RequestParam("username") username: String,
-              @RequestParam("password") password: String, request: HttpServletRequest): ResponseEntity<Any> {
+              @RequestParam("password") password: String,
+              request: HttpServletRequest): ResponseEntity<Any> {
         try {
             val authentication: Authentication =
                     authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, password))
@@ -53,8 +54,10 @@ class AuthController(val authenticationManager: AuthenticationManager, val accou
 
     @PostMapping("/signUp")
     fun signUp(@RequestParam("username") username: String,
-               @RequestParam("password") password: String, @RequestParam("name") name: String,
-               @RequestParam("email") email: String, request: HttpServletRequest): ResponseEntity<Any> {
+               @RequestParam("password") password: String,
+               @RequestParam("name") name: String,
+               @RequestParam("email") email: String,
+               request: HttpServletRequest): ResponseEntity<Any> {
         accountRepository.save(Account(username = username, password = password, name = name, email = email))
         return ResponseEntity <Any>(HttpStatus.OK)
     }

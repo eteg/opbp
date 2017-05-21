@@ -1,4 +1,4 @@
-package br.com.eteg.opbp.config
+package br.com.eteg.opbp.configs
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpStatus
@@ -14,8 +14,11 @@ class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
         with(http!!) {
             csrf().disable()
             authorizeRequests().antMatchers("/rest/**").fullyAuthenticated()
-            logout().logoutUrl("/signOut").permitAll()
-                    .logoutSuccessHandler(HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK))
+
+            with(logout()) {
+                logoutUrl("/signOut").permitAll()
+                logoutSuccessHandler(HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK))
+            }
         }
     }
 }

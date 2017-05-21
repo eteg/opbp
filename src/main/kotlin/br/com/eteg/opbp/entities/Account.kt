@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-class Account(
+data class Account(
         @Id @GeneratedValue
         var id: Int? = null,
 
