@@ -1,7 +1,9 @@
 package br.com.eteg.opbp.controllers
 
-import br.com.eteg.opbp.entities.Account
+import br.com.eteg.opbp.entities.auth.Account
+import br.com.eteg.opbp.entities.auth.Authority
 import br.com.eteg.opbp.repositories.AccountRepository
+import br.com.eteg.opbp.repositories.AuthorityRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
@@ -20,7 +22,10 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
 
 @Controller
-class AuthController(val authenticationManager: AuthenticationManager, val accountRepository: AccountRepository) {
+class AuthController(
+        val authenticationManager: AuthenticationManager,
+        val accountRepository: AccountRepository,
+        val authorityRepository: AuthorityRepository) {
     @GetMapping("/loggedUser")
     @ResponseBody
     fun getLoggedUser(): String {
@@ -58,7 +63,10 @@ class AuthController(val authenticationManager: AuthenticationManager, val accou
                @RequestParam("name") name: String,
                @RequestParam("email") email: String,
                request: HttpServletRequest): ResponseEntity<Any> {
-        accountRepository.save(Account(username = username, password = password, name = name, email = email))
+        val basicAuthority: Authority = authorityRepository.findByName("BASIC")!!
+        val account = Account(username = username, password = password, name = name,
+                email = email, authorities = arrayListOf(basicAuthority))
+        accountRepository.save(account)
         return ResponseEntity <Any>(HttpStatus.OK)
     }
 

@@ -1,6 +1,6 @@
 package br.com.eteg.opbp.configs
 
-import br.com.eteg.opbp.entities.Account
+import br.com.eteg.opbp.entities.auth.Account
 import br.com.eteg.opbp.repositories.AccountRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -24,7 +24,8 @@ class GlobalAuthenticationConfiguration(val accountRepository: AccountRepository
             val account: Account? = accountRepository.findByUsername(username)
 
             if (null != account) {
-                User(account.username, account.password, AuthorityUtils.createAuthorityList("USER"))
+                val autothoriesNames = account.authorities.map { it.name }.toTypedArray()
+                User(account.username, account.password, AuthorityUtils.createAuthorityList(*autothoriesNames))
             } else {
                 throw UsernameNotFoundException("could not find the user ${username}")
             }
