@@ -3,7 +3,7 @@
  */
 buildscript {
     ext {
-        kotlinVersion = '1.1.2'
+        kotlinVersion = '1.1.2-2'
         springBootVersion = '1.5.3.RELEASE'
     }
     repositories {
@@ -40,6 +40,14 @@ bootRun {
 /*
  * Tasks
  */
+task createMongoDockerContainer(type: Exec) {
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        commandLine 'cmd', '/c', 'docker', 'run', '--name', 'vm-mongo', '-p', '27017:27017', '-d', 'mongo'
+    } else {
+        commandLine 'docker', 'run', '--name', 'vm-mongo', '-p', '27017:27017', '-d', 'mongo'
+    }
+}
+
 task buildDocker(type: Copy) {
     from 'src/main/docker/Dockerfile'
     into 'build/libs'
@@ -89,7 +97,7 @@ compileTestKotlin {
 dependencies {
     compile project(':opbp-frontend')
     compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
     compile 'org.springframework.boot:spring-boot-starter-data-rest'
     compile 'org.springframework.boot:spring-boot-starter-security'
     compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")

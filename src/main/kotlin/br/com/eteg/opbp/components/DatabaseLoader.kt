@@ -9,14 +9,11 @@ import org.springframework.stereotype.Component
 class DatabaseLoader(val userRepository: AccountRepository) : CommandLineRunner {
     override fun run(vararg args: String?) {
         with(userRepository) {
-            save(Account(username = "dougefr", password = "123456",
-                    name = "Douglas Rodrigues", email = "dougefr@gmail.com"))
-            save(Account(username = "admin", password = "123456",
-                    name = "Admin", email = "-"))
-
-            // Lista os usuários previamente criados
-            for(user in findAll()){
-                println(user)
+            if(count() == 0L) {
+                save(Account(username = "dougefr", password = "123456",
+                        name = "Douglas Rodrigues", email = "dougefr@gmail.com"))
+                save(Account(username = "admin", password = "123456",
+                        name = "Admin", email = "-"))
             }
         }
     }
