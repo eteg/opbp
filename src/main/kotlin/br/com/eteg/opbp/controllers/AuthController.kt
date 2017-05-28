@@ -1,16 +1,13 @@
 package br.com.eteg.opbp.controllers
 
 import br.com.eteg.opbp.entities.auth.Account
-import br.com.eteg.opbp.entities.auth.Authority
 import br.com.eteg.opbp.repositories.AccountRepository
 import br.com.eteg.opbp.repositories.AuthorityRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
 import org.springframework.security.core.AuthenticationException
-import org.springframework.security.core.context.SecurityContext
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Controller
@@ -42,13 +39,13 @@ class AuthController(
               @RequestParam("password") password: String,
               request: HttpServletRequest): ResponseEntity<Any> {
         try {
-            val authentication: Authentication =
+            val authentication =
                     authenticationManager.authenticate(UsernamePasswordAuthenticationToken(username, password))
 
-            val securityContext: SecurityContext = SecurityContextHolder.getContext()
+            val securityContext = SecurityContextHolder.getContext()
             securityContext.authentication = authentication
 
-            val session: HttpSession = request.getSession(true)
+            val session = request.getSession(true)
             session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext)
 
             return ResponseEntity<Any>(HttpStatus.OK)
@@ -63,7 +60,7 @@ class AuthController(
                @RequestParam("name") name: String,
                @RequestParam("email") email: String,
                request: HttpServletRequest): ResponseEntity<Any> {
-        val basicAuthority: Authority = authorityRepository.findByName("BASIC")!!
+        val basicAuthority = authorityRepository.findByName("BASIC")!!
         val account = Account(username = username, password = password, name = name,
                 email = email, authorities = arrayListOf(basicAuthority))
         accountRepository.save(account)

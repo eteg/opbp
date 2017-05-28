@@ -1,6 +1,5 @@
 package br.com.eteg.opbp.configs
 
-import br.com.eteg.opbp.entities.auth.Account
 import br.com.eteg.opbp.repositories.AccountRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -21,7 +20,7 @@ class GlobalAuthenticationConfiguration(val accountRepository: AccountRepository
     @Bean
     fun userDetailsService(): UserDetailsService {
         return UserDetailsService { username ->
-            val account: Account? = accountRepository.findByUsername(username)
+            val account = accountRepository.findByUsername(username)
 
             if (null != account) {
                 val autothoriesNames = account.authorities.map { it.name }.toTypedArray()

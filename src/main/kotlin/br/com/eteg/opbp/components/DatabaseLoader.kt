@@ -16,8 +16,8 @@ class DatabaseLoader(val userRepository: AccountRepository, val authorityReposit
         }
 
         if (userRepository.count() == 0L) {
-            val adminAuthority: Authority = authorityRepository.findByName("ADMIN")!!
-            val basicAuthority: Authority = authorityRepository.findByName("BASIC")!!
+            val adminAuthority = authorityRepository.findByName("ADMIN")!!
+            val basicAuthority = authorityRepository.findByName("BASIC")!!
 
             userRepository.save(Account(username = "admin", password = "admin",
                     name = "Admin", email = "-", authorities = arrayListOf(adminAuthority, basicAuthority)))
