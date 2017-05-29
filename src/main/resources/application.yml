@@ -1,0 +1,19 @@
+spring:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/opbp
+      username: postgres
+      password: postgres
+
+    # Configurações do JPA
+    jpa:
+      show-sql: false
+
+      # Configurações do hibernate
+      hibernate:
+        ddl-auto: create-drop
+
+    data:
+      mongodb:
+        host: localhost
+        port: 27017
+        database: opbp

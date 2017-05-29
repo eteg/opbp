@@ -6,7 +6,5 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
 
 @Configuration
 class RestDataConfiguration : RepositoryRestMvcConfiguration() {
-    override fun config(): RepositoryRestConfiguration {
-        return super.config().setBasePath("/rest")
-    }
+    override fun config(): RepositoryRestConfiguration = super.config().setBasePath("/rest")
 }

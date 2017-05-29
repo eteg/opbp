@@ -1,6 +1,6 @@
 package br.com.eteg.opbp.configs
 
-import br.com.eteg.opbp.repositories.AccountRepository
+import br.com.eteg.opbp.repositories.postgres.AccountRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder

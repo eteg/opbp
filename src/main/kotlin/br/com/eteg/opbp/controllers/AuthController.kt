@@ -1,8 +1,8 @@
 package br.com.eteg.opbp.controllers
 
 import br.com.eteg.opbp.entities.auth.Account
-import br.com.eteg.opbp.repositories.AccountRepository
-import br.com.eteg.opbp.repositories.AuthorityRepository
+import br.com.eteg.opbp.repositories.postgres.AccountRepository
+import br.com.eteg.opbp.repositories.postgres.AuthorityRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager

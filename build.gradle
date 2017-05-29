@@ -3,8 +3,8 @@
  */
 buildscript {
     ext {
-        kotlinVersion = '1.1.2-2'
-        springBootVersion = '1.5.3.RELEASE'
+        kotlinVersion = "1.1.2-2"
+        springBootVersion = "1.5.3.RELEASE"
     }
     repositories {
         mavenCentral()
@@ -19,22 +19,22 @@ buildscript {
 /*
  * Aplica outros plugins
  */
-apply plugin: 'idea'
-apply plugin: 'kotlin'
-apply plugin: 'kotlin-spring'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
+apply plugin: "idea"
+apply plugin: "kotlin"
+apply plugin: "kotlin-spring"
+apply plugin: "eclipse"
+apply plugin: "org.springframework.boot"
 
 /*
  * Configura o artefato gerado pela build.
  */
 jar {
-    baseName = 'opbp'
-    version = '0.0.1'
+    baseName = "opbp"
+    version = "0.0.1"
 }
 
 bootRun {
-    args = ['--spring.profiles.active=dev']
+    args = ["--spring.profiles.active=dev"]
 }
 
 /*
@@ -42,15 +42,15 @@ bootRun {
  */
 task createMongoDockerContainer(type: Exec) {
     if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
-        commandLine 'cmd', '/c', 'docker', 'run', '--name', 'vm-mongo', '-p', '27017:27017', '-d', 'mongo'
+        commandLine "cmd", "/c", "docker", "run", "--name", "vm-mongo", "-p", "27017:27017", "-d", "mongo"
     } else {
-        commandLine 'docker', 'run', '--name', 'vm-mongo', '-p', '27017:27017', '-d', 'mongo'
+        commandLine "docker", "run", "--name", "vm-mongo", "-p", "27017:27017", "-d", "mongo"
     }
 }
 
 task buildDocker(type: Copy) {
-    from 'src/main/docker/Dockerfile'
-    into 'build/libs'
+    from "src/main/docker/Dockerfile"
+    into "build/libs"
 }
 build.finalizedBy(buildDocker)
 
@@ -95,13 +95,14 @@ compileTestKotlin {
 }
 
 dependencies {
-    compile project(':opbp-frontend')
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    compile 'org.springframework.boot:spring-boot-starter-data-rest'
-    compile 'org.springframework.boot:spring-boot-starter-security'
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
-    compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
-    runtime 'com.h2database:h2'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    compile project(":opbp-frontend")
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb"
+    compile "org.springframework.boot:spring-boot-starter-data-rest"
+    compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"
+    compile "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+    compile "org.postgresql:postgresql:9.4-1206-jdbc42"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
 }
